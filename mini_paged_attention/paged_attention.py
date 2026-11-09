@@ -95,3 +95,4 @@ def paged_attention_reference(
     probs = torch.softmax(scores, dim=-1)
     out = torch.matmul(probs, v)                       # [batch, heads, 1, head_dim]
     return out.squeeze(2)
+

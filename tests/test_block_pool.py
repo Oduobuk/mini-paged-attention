@@ -53,3 +53,4 @@ def test_copy_on_write():
     # Verify copied data is identical
     assert torch.equal(pool.key_cache[b0, 0], pool.key_cache[new_b, 0])
     assert torch.equal(pool.value_cache[b0, 0], pool.value_cache[new_b, 0])
+

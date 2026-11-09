@@ -57,3 +57,4 @@ class Sequence:
         self.output_token_ids.append(token_id)
         if len(self.output_token_ids) >= self.max_tokens:
             self.status = SequenceStatus.FINISHED
+

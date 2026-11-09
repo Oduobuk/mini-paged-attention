@@ -109,3 +109,4 @@ class KVCachePool:
         element_size = self.key_cache.element_size()
         elements = self.num_blocks * self.block_size * self.num_heads * self.head_dim * 2
         return elements * element_size
+

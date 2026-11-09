@@ -60,3 +60,4 @@ def test_scheduler_preemption_on_memory_pressure():
     step2 = scheduler.step()
     assert len(step2["preempted_ids"]) > 0
     assert step2["num_running"] < 2
+

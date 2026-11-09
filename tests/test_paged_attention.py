@@ -95,3 +95,4 @@ def test_paged_attention_varying_dimensions(head_dim, block_size):
     )
     assert out.shape == (1, num_heads, head_dim)
     assert not torch.isnan(out).any()
+

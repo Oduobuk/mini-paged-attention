@@ -5,7 +5,26 @@ import random
 # Ensure repository root is on sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from tabulate import tabulate
+try:
+    from tabulate import tabulate
+except ImportError:
+    def tabulate(data, headers=(), tablefmt="github"):
+        headers = list(headers)
+        rows = [[str(cell) for cell in row] for row in data]
+        col_widths = [len(h) for h in headers] if headers else [0] * (len(rows[0]) if rows else 0)
+        for row in rows:
+            for i, cell in enumerate(row):
+                if i >= len(col_widths):
+                    col_widths.append(len(cell))
+                else:
+                    col_widths[i] = max(col_widths[i], len(cell))
+        lines = []
+        if headers:
+            lines.append("| " + " | ".join(h.ljust(col_widths[i]) for i, h in enumerate(headers)) + " |")
+            lines.append("|-" + "-|-".join("-" * col_widths[i] for i in range(len(headers))) + "-|")
+        for row in rows:
+            lines.append("| " + " | ".join(cell.ljust(col_widths[i]) for i, cell in enumerate(row)) + " |")
+        return "\n".join(lines)
 from mini_paged_attention.block_pool import KVCachePool
 from mini_paged_attention.sequence import Sequence
 from mini_paged_attention.scheduler import ContinuousBatchScheduler
